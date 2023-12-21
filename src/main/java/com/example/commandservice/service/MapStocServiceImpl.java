@@ -48,7 +48,7 @@ public class MapStocServiceImpl implements MapStocService{
 
     @Override
     public MapStocOptim updMapStoc(MapStocOptim mp) {
-      Optional<MapStocOptim> op=mapStocRepo.findByCodProdus(mp.getIdIntern());
+      Optional<MapStocOptim> op=mapStocRepo.findByCodProdus(mp.getIdIntern().trim());
       if(op.isEmpty()){
           throw new RuntimeException("Maparea cu codul dat , nu exista!!");
       }
