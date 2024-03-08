@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/command")
-@CrossOrigin
+//@CrossOrigin
 public class ComController {
 
     private MapStocService mapStocService;
