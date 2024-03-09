@@ -63,7 +63,7 @@ jobs:
             mkdir -p ~/.ssh
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-            scp -o StrictHostKeyChecking=no ./elasticbeanstalk/docker-compose.yaml ec2-user@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
+            scp -o StrictHostKeyChecking=no ./elasticbeanstalk/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
             ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
         env:
             EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
