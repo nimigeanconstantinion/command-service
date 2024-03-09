@@ -60,6 +60,7 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install -y ssh
+            sudo -i
             mkdir -p ~/.ssh
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
