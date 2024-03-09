@@ -60,8 +60,8 @@ jobs:
         run: |
             sudo apt-get update
             sudo apt-get install -y ssh
-            sudo -i
             mkdir -p ~/.ssh
+            echo "Am facut folderul"
             echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
             scp -o StrictHostKeyChecking=no ./elasticbeanstalk/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
