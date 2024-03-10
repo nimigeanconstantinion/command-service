@@ -56,16 +56,16 @@ jobs:
             git commit -m "new app version: ${{ env.BUILD_NUMBER }}"
             git push origin HEAD:master
 
-      - name: Deploy to EC2
-        run: |
-            sudo apt-get update
-            sudo apt-get install -y ssh
-            mkdir -p ~/.ssh
-            echo "Am facut folderul"
-            echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-            chmod 600 ~/.ssh/id_rsa
-            scp -o StrictHostKeyChecking=no ./elasticbeanstalk/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
-            ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
-        env:
-            EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-            EC2_INSTANCE_IP: 3.252.249.66
+#      - name: Deploy to EC2
+#        run: |
+#            sudo apt-get update
+#            sudo apt-get install -y ssh
+#            mkdir -p ~/.ssh
+#            echo "Am facut folderul"
+#            echo "${{ secrets.EC2_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+#            chmod 600 ~/.ssh/id_rsa
+#            scp -o StrictHostKeyChecking=no ./elasticbeanstalk/docker-compose.yaml ubuntu@${{ env.EC2_INSTANCE_IP }}:/home/doker/docker-compose.yaml
+#            ssh -o StrictHostKeyChecking=no ubuntu@${{ env.EC2_INSTANCE_IP }} "cd /home/doker/ && docker-compose up -d"
+#        env:
+#            EC2_SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+#            EC2_INSTANCE_IP: 3.252.249.66
