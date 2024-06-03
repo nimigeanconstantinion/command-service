@@ -12,6 +12,11 @@ spring:
       hibernate.format_sql: true
     show-sql: true
 
+  cloud:
+    eureka:
+      client:
+        serviceUrl:
+          defaultZone: http://discovery-service:8761/eureka
 server:
   error:
     include-binding-errors: always
