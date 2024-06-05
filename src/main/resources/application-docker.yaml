@@ -17,6 +17,10 @@ spring:
       client:
         serviceUrl:
           defaultZone: http://discovery-service:8761/eureka
+        fetch-registry: true
+        register-with-eureka: true
+        enabled: false
+
 server:
   error:
     include-binding-errors: always
