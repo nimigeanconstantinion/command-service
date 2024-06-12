@@ -12,14 +12,12 @@ spring:
       hibernate.format_sql: true
     show-sql: true
 
-  cloud:
-    eureka:
-      client:
-        serviceUrl:
-          defaultZone: http://discovery-service:8761/eureka
-        fetch-registry: true
-        register-with-eureka: true
-        enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka
+      fetch-registry: true
+      register-with-eureka: true
 
 server:
   error:
