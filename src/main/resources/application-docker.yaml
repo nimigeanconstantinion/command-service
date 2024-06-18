@@ -12,15 +12,17 @@ spring:
       hibernate.format_sql: true
     show-sql: true
 
-  zipkin:
-    base-url: http://zipkin:9411
-
 eureka:
   client:
     serviceUrl:
       defaultZone: http://discovery-service:8761/eureka
       fetch-registry: true
       register-with-eureka: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
 
 server:
   error:
