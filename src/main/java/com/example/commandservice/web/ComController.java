@@ -5,6 +5,7 @@ import com.example.commandservice.repository.MapStocRepo;
 import com.example.commandservice.service.MapStocService;
 import com.example.commandservice.service.MapStocServiceImpl;
 import jakarta.persistence.PostUpdate;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/v1/command")
 //@CrossOrigin
+@Slf4j
 public class ComController {
 
     private MapStocService mapStocService;
@@ -30,6 +32,7 @@ public class ComController {
        try {
             mapStocService.addMapStoc(mapstoc);
             MapStocOptim amp=mapStocService.getByID(mapstoc.getIdIntern());
+
             return ResponseEntity.ok(amp);
        }catch (RuntimeException e){
             throw new RuntimeException(e.getMessage());
