@@ -11,10 +11,12 @@ spring:
       hibernate-dialect: org.hibernate.dialect.MySQL8Dialect
       hibernate.format_sql: true
     show-sql: true
+
   zipkin:
     base-url: http://zipkin:9411/
     collector:
       host: zipkin
+
   sleuth:
     sampler:
       probability: 1.0
