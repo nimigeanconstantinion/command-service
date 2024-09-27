@@ -75,6 +75,7 @@ public class ComController {
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/update")
     public ResponseEntity<MapStocOptim> updateMapArt(@RequestBody MapStocOptim mapstoc){
+        log.info("COMM_UPDATE:"+mapstoc.toString());
        return ResponseEntity.ok(mapStocService.updMapStoc(mapstoc));
     }
 

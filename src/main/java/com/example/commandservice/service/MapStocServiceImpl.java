@@ -3,6 +3,7 @@ package com.example.commandservice.service;
 import com.example.commandservice.model.MapStocOptim;
 import com.example.commandservice.repository.MapStocRepo;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,7 @@ public class MapStocServiceImpl implements MapStocService{
     public void addMapStoc(MapStocOptim mp) {
 
         try{
-            log.info("_PLUS:",mp);
+            log.info("COMM_ADD:"+mp.toString());
             mapStocRepo.save(mp);
 //            return mapStocRepo.findByCodProdus(mp.getIdIntern()).get();
         }catch (RuntimeException e){
@@ -45,7 +46,9 @@ public class MapStocServiceImpl implements MapStocService{
         if(mp.isEmpty()){
             throw new RuntimeException("Produsul cu cod-ul indicat nu exista!!");
         }
-        log.info("_MINUS:",mp.get());
+        MDC.put("commDel",mp.toString());
+
+        log.info("commDel: "+mp.toString());
         mapStocRepo.delete(mp.get());
         return true;
     }
@@ -57,7 +60,7 @@ public class MapStocServiceImpl implements MapStocService{
           throw new RuntimeException("Maparea cu codul dat , nu exista!!");
       }
       try{
-          log.info("_UPD:",mp);
+          log.info("COMM_UPD:"+mp.toString());
          return mapStocRepo.saveAndFlush(mp);
 
       }catch (RuntimeException e){
