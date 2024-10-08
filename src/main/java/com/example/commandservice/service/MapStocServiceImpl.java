@@ -4,6 +4,8 @@ import com.example.commandservice.model.MapStocOptim;
 import com.example.commandservice.repository.MapStocRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -46,8 +48,10 @@ public class MapStocServiceImpl implements MapStocService{
         if(mp.isEmpty()){
             throw new RuntimeException("Produsul cu cod-ul indicat nu exista!!");
         }
-        MDC.put("commDel",mp.toString());
-
+        MDC.put("commDel",mp.get().toString());
+        log.info("STERGERE PRODUS");
+        Marker mk= MarkerFactory.getMarker("delProd");
+        log.info(mk,mp.get().getArticol());
         log.info("commDel: "+mp.toString());
         mapStocRepo.delete(mp.get());
         return true;
