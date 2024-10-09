@@ -47,7 +47,7 @@
             </providers>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>./logs/command-service.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>./logs/nserver-service.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
         </rollingPolicy>
