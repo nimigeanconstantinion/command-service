@@ -64,7 +64,7 @@ public class MapStocServiceImpl implements MapStocService{
           throw new RuntimeException("Maparea cu codul dat , nu exista!!");
       }
       try{
-          log.info("COMM_UPD:"+mp.toString());
+          log.info("COMM_UPD:"+op.get().toString());
          return mapStocRepo.saveAndFlush(mp);
 
       }catch (RuntimeException e){
