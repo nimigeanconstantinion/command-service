@@ -65,9 +65,10 @@ public class MapStocServiceImpl implements MapStocService{
       }
       try{
           MapStocOptim mpp=op.get();
+          mpp.setNr_zile(mp.getNr_zile());
           log.info("UPDATE!!");
 //          log.info("commUpd-",op.toString());
-          log.info("commUpd:"+op.toString());
+          log.info("commUpd: "+mpp.toString());
 
 //          MDC.put("commUpd:",mp.toString());
 
