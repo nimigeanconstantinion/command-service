@@ -51,7 +51,7 @@ public class MapStocServiceImpl implements MapStocService{
         MDC.put("commDel",mp.get().toString());
         log.info("STERGERE PRODUS");
         Marker mk= MarkerFactory.getMarker("delProd");
-        log.info(mk,mp.get().getArticol());
+//        log.info(mk,mp.get().getArticol());
         log.info("commDel: "+mp.toString());
         mapStocRepo.delete(mp.get());
         return true;
@@ -64,8 +64,11 @@ public class MapStocServiceImpl implements MapStocService{
           throw new RuntimeException("Maparea cu codul dat , nu exista!!");
       }
       try{
-          log.info("COMM_UPD:"+op.get().toString());
-         return mapStocRepo.saveAndFlush(mp);
+          log.info("UPDATE!!");
+          log.info("commUpd:"+mp.toString());
+//          MDC.put("commUpd:",mp.toString());
+
+          return mapStocRepo.saveAndFlush(mp);
 
       }catch (RuntimeException e){
         throw new RuntimeException("Nu am reusit UPdate!!");
