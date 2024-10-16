@@ -59,13 +59,14 @@ public class MapStocServiceImpl implements MapStocService{
 
     @Override
     public MapStocOptim updMapStoc(MapStocOptim mp) {
-      Optional<MapStocOptim> op=mapStocRepo.findByCodProdus(mp.getIdIntern().trim());
+      Optional<MapStocOptim> op=mapStocRepo.findByCodProdus(mp.getIdIntern());
       if(op.isEmpty()){
           throw new RuntimeException("Maparea cu codul dat , nu exista!!");
       }
       try{
+          MapStocOptim mpp=op.get();
           log.info("UPDATE!!");
-          log.info("commUpd-",op.toString());
+//          log.info("commUpd-",op.toString());
           log.info("commUpd:"+op.toString());
 
 //          MDC.put("commUpd:",mp.toString());
