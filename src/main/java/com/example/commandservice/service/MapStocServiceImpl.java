@@ -65,8 +65,8 @@ public class MapStocServiceImpl implements MapStocService{
       }
       try{
           log.info("UPDATE!!");
-          log.info("commUpd-",op.get().toString());
-          log.info("commUpd:"+op.get().toString());
+          log.info("commUpd-",op.toString());
+          log.info("commUpd:"+op.toString());
 
 //          MDC.put("commUpd:",mp.toString());
 
