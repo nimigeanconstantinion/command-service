@@ -65,7 +65,7 @@ public class MapStocServiceImpl implements MapStocService{
       }
       try{
           log.info("UPDATE!!");
-          log.info("commUpd:"+mp.toString());
+          log.info("commUpd:",(Object) mp);
 //          MDC.put("commUpd:",mp.toString());
 
           return mapStocRepo.saveAndFlush(mp);
