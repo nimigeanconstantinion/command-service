@@ -6,13 +6,15 @@ import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "MapStoc")
 @Table(name = "map_stoc_optim")
 
-public class MapStocOptim {
+public class MapStocOptim implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO,generator = "map_art_generator")
     @SequenceGenerator(name = "map_art_generator",initialValue = 1,allocationSize = 1)

@@ -33,10 +33,12 @@ public class MapStocServiceImpl implements MapStocService{
     public void addMapStoc(MapStocOptim mp) {
 
         try{
-            log.info("COMM_ADD:"+mp.toString());
+            log.info("cmdAdd: "+mp.toString());
             mapStocRepo.save(mp);
 //            return mapStocRepo.findByCodProdus(mp.getIdIntern()).get();
         }catch (RuntimeException e){
+            log.error("cmdUpdErr: "+mp.toString());
+
             throw new RuntimeException("Nu am reusit add din service impl!!");
         }
 
@@ -46,13 +48,12 @@ public class MapStocServiceImpl implements MapStocService{
     public boolean delMapStoc(String idp) {
         Optional<MapStocOptim> mp=mapStocRepo.findByCodProdus(idp);
         if(mp.isEmpty()){
+            log.error("cmdDelErrNoCode: "+mp.toString());
+
             throw new RuntimeException("Produsul cu cod-ul indicat nu exista!!");
         }
-        MDC.put("commDel",mp.get().toString());
-        log.info("STERGERE PRODUS");
-        Marker mk= MarkerFactory.getMarker("delProd");
 //        log.info(mk,mp.get().getArticol());
-        log.info("commDel: "+mp.toString());
+        log.info("cmdDel: "+mp.toString());
         mapStocRepo.delete(mp.get());
         return true;
     }
@@ -61,6 +62,7 @@ public class MapStocServiceImpl implements MapStocService{
     public MapStocOptim updMapStoc(MapStocOptim mp) {
       Optional<MapStocOptim> op=mapStocRepo.findByCodProdus(mp.getIdIntern());
       if(op.isEmpty()){
+          log.error("cmdUpdNoCode:"+mp.getIdIntern());
           throw new RuntimeException("Maparea cu codul dat , nu exista!!");
       }
       try{
@@ -68,13 +70,13 @@ public class MapStocServiceImpl implements MapStocService{
           mpp.setNr_zile(mp.getNr_zile());
           log.info("UPDATE!!");
 //          log.info("commUpd-",op.toString());
-          log.info("commUpd: "+mpp.toString());
-
-//          MDC.put("commUpd:",mp.toString());
+          log.info("cmdUpd: "+mpp.toString());
 
           return mapStocRepo.saveAndFlush(mp);
 
       }catch (RuntimeException e){
+          log.error("cmdUpdErr: "+mp.toString());
+
         throw new RuntimeException("Nu am reusit UPdate!!");
       }
     }
@@ -92,9 +94,11 @@ public class MapStocServiceImpl implements MapStocService{
     @Override
     public boolean saveBulk(List<MapStocOptim> lista) {
         try {
+            log.info("cmdUpdBulk: "+lista.size());
             mapStocRepo.saveAllAndFlush(lista);
             return true;
         }catch (RuntimeException e){
+            log.error("cmdUpdErrBulk: "+lista.size());
             throw new RuntimeException("Nu am putut salva produsele noi!");
         }
     }
