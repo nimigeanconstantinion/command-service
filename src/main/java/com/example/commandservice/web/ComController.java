@@ -1,11 +1,15 @@
 package com.example.commandservice.web;
 
 import com.example.commandservice.model.MapStocOptim;
+import com.example.commandservice.rabbitMQListener.ConsumerConfig;
+import com.example.commandservice.rabbitMQListener.MyMessage;
+import com.example.commandservice.rabbitMQListener.MyMessageListener;
 import com.example.commandservice.repository.MapStocRepo;
 import com.example.commandservice.service.MapStocService;
 import com.example.commandservice.service.MapStocServiceImpl;
 import jakarta.persistence.PostUpdate;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +25,19 @@ public class ComController {
 
     private MapStocService mapStocService;
 
-    public ComController( MapStocService mapStocService) {
+    private MyMessageListener myMessageListener;
+    public ComController( MapStocService mapStocService,MyMessageListener myMessageListener) {
 
         this.mapStocService = mapStocService;
+        this.myMessageListener=myMessageListener;
+
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/add")
     public ResponseEntity<MapStocOptim> addMapArt(@RequestBody MapStocOptim mapstoc){
        try {
+
             mapStocService.addMapStoc(mapstoc);
             MapStocOptim amp=mapStocService.getByID(mapstoc.getIdIntern());
 
@@ -54,9 +62,12 @@ public class ComController {
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/del/{idP}")
-    public ResponseEntity<Boolean> delMapArt(@PathVariable String idP){
 
-        return ResponseEntity.ok(mapStocService.delMapStoc(idP));
+    public ResponseEntity<Boolean> delMapArt(@PathVariable String idP){
+//        MyMessage myMessage=myMessageListener.receiveMessage(MyMessage my);
+
+                return ResponseEntity.ok(true);
+//                return ResponseEntity.ok(mapStocService.delMapStoc(idP));
     }
 
     @ResponseStatus(HttpStatus.OK)
