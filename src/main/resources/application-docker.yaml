@@ -44,6 +44,14 @@ management:
       show-details: always
     pause:
       enabled: true
+rabbitmq:
+  exchanges:
+    internal: internal.exchange
+  queues:
+    notification: notification.queue
+  routing-keys:
+    internal-notification: internal.notification.routing-key
+
 
 logging:
   pattern:
