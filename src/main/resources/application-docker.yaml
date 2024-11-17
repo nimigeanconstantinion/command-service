@@ -17,6 +17,10 @@ spring:
     collector:
       host: zipkin
 
+  rabbitmq:
+    host: rabbitmq
+
+
   sleuth:
     sampler:
       probability: 1.0
@@ -44,6 +48,7 @@ management:
       show-details: always
     pause:
       enabled: true
+
 rabbitmq:
   exchanges:
     internal: internal.exchange
