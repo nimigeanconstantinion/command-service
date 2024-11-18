@@ -88,13 +88,15 @@ public class ComController {
     public ResponseEntity<MapStocOptim> updateMapArt(@RequestBody MapStocOptim mapstoc){
         log.info("COMM_UPDATE:"+mapstoc.toString());
         log.info("Updateeeeeeee");
-       return ResponseEntity.ok(mapStocService.updMapStoc(mapstoc));
+        return ResponseEntity.ok(mapstoc);
+//       return ResponseEntity.ok(mapStocService.updMapStoc(mapstoc));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/bulk")
     public ResponseEntity<Boolean> saveBulkList(@RequestBody List<MapStocOptim> lista){
-        return ResponseEntity.ok(mapStocService.saveBulk(lista));
+        return ResponseEntity.ok(true);
+//        return ResponseEntity.ok(mapStocService.saveBulk(lista));
     }
 
 }
