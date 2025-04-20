@@ -3,6 +3,7 @@ spring:
     url: jdbc:mysql://mysql-service:3306/testdb?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
     username: testuser
     password: testpass
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   zipkin:
     base-url: http://zipkin:9411/
