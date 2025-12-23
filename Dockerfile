@@ -1,5 +1,6 @@
 # Use the official OpenJDK base image
-FROM openjdk:17.0.1-jdk-slim
+FROM openjdk:17.0.1-slim
+
 
 # Metadata as described above
 LABEL maintainer="constantin.nimigean@gmail.com"

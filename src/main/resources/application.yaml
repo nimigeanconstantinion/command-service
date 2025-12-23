@@ -1,0 +1,88 @@
+spring:
+  application:
+    name: command-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/micro_db?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+    show-sql: true
+
+  cloud:
+    eureka:
+      client:
+        serviceUrl:
+          defaultZone: http://localhost:8761/eureka
+#
+  zipkin:
+    base-url: http://localhost:9411/
+    collector:
+      host: localhost
+##
+  sleuth:
+    sampler:
+      probability: 1.0
+#
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8085/realms/rsk/protocol/openid-connect/certs
+
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowed-origins: "http://localhost:5000,http://localhost:3000,http://127.0.0.1:8000,http://localhost:8085"  # Updated to reflect the gateway's address if served through the gateway.
+            allowed-methods: "GET, POST, PUT, DELETE, OPTIONS"
+            allowed-headers: "Authorization, Content-Type, Accept"
+            allow-credentials: true
+            max-age: 1800 # 30 minutes
+
+server:
+  port: 8081
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  level:
+    root: info
+  file:
+    name: command-service.log
+
+management:
+  tracing:
+    enabled: false
+    sampling:
+      probability: 1
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      show:
+        details: always
+    prometheus:
+      enabled: true
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.request: true
+
+
+app:
+  security:
+    expected-issuer: http://localhost:8085/realms/rsk
