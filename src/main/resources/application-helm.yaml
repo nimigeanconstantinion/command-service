@@ -13,6 +13,13 @@ spring:
       hibernate.format_sql: true
     show-sql: true
 
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak:8080/realms/rsk/protocol/openid-connect/certs
+
+
   zipkin:
     base-url: http://zipkin:9411/
     collector:
@@ -59,6 +66,11 @@ rabbitmq:
     internal-notification: internal.notification.routing-key
 
 
+app:
+  security:
+    expected-issuer: http://keycloak:8080/realms/rsk
+
+
 logging:
   pattern:
     level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
@@ -66,6 +78,7 @@ logging:
     root: debug
   file:
     name: command-service.log
+
 
 server:
   error:
